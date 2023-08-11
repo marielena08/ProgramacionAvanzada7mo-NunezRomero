@@ -1,0 +1,30 @@
+<html>
+    <!-- MARIELENA NUÑEZ ROMERO
+        PROGRAMACION AVANZADA EN INTERNET
+        Utiliza fillRect & fillStyle para realizar la siguiente figura. 
+    -->
+    <head>
+        <style>
+            canvas{
+                background-color: bisque;
+            }
+        </style>
+    </head>
+
+    <body>
+        <canvas id="mycanvas" width="500" height="250"></canvas>
+        <script>
+            var canvas = document.getElementById('mycanvas'); 
+            var ctx = canvas.getContext('2d');
+
+            ctx.fillStyle = "rgb(125,136,229)";
+            ctx.fillRect (20, 20, 70, 60);
+
+            ctx.fillStyle = "rgb(205,0,9)";
+            ctx.fillRect (70, 60, 70, 60);
+
+            ctx.fillStyle = "rgb(255,150,255,0.5)";
+            ctx.fillRect (120, 100, 70, 60);
+        </script>
+    </body>
+</html>
