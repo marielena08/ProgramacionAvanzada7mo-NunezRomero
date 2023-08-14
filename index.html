@@ -1,7 +1,9 @@
 <html>
     <!-- MARIELENA NUÑEZ ROMERO
         PROGRAMACION AVANZADA EN INTERNET
-        Utiliza fillRect & fillStyle para realizar la siguiente figura. 
+        2.-Utiliza fillRect & fillStyle para realizar 3 cuadrados. 
+        3.-Utiliza moveTo, lineTo y stroke para realizar un triangulo y una linea
+        4.-Utiliza beginPath, arc y stroke para realizar 2 circulos
     -->
     <head>
         <style>
@@ -10,13 +12,12 @@
             }
         </style>
     </head>
-
     <body>
         <canvas id="mycanvas" width="500" height="250"></canvas>
         <script>
             var canvas = document.getElementById('mycanvas'); 
             var ctx = canvas.getContext('2d');
-
+// --------------- C U A D R A D O S -----------------------------
             ctx.fillStyle = "rgb(125,136,229)";
             ctx.fillRect (20, 20, 70, 60);
 
@@ -25,6 +26,32 @@
 
             ctx.fillStyle = "rgb(255,150,255,0.5)";
             ctx.fillRect (120, 100, 70, 60);
+// ---------------T R I A N G U L O -----------------------------
+            ctx.fillStyle = "rgb(125,200,155)";
+            ctx.beginPath();
+            ctx.moveTo(300, 20);
+            ctx.lineTo(270, 70);
+            ctx.lineTo(300, 80,);
+            ctx.fill();
+            ctx.closePath();
+// ---------------L I N E A -----------------------------
+            ctx.beginPath();
+            ctx.moveTo(350, 40,);
+            ctx.lineTo(350, 90);
+
+            ctx.stroke();
+            ctx.fill();
+// ------------------C I R C U L O S --------------------------
+            ctx.fillStyle = "rgb(150,200,55)";
+            ctx.beginPath();
+            ctx.arc(300, 170, 40, 0, 2 * Math.PI);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(400, 170, 40, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
         </script>
+        
     </body>
 </html>
