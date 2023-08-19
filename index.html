@@ -4,6 +4,10 @@
         2.-Utiliza fillRect & fillStyle para realizar 3 cuadrados. 
         3.-Utiliza moveTo, lineTo y stroke para realizar un triangulo y una linea
         4.-Utiliza beginPath, arc y stroke para realizar 2 circulos
+        6.-Utiliza font y fillText para realizar un texto
+        7.-Utiliza createLinearGradient, addColorStop y fillRect para realizar una figura
+        8.-Utiliza createRadialGradient, addColorStop y fillRect para realizar una figura
+        9.-Utiliza drawImage 
     -->
     <head>
         <style>
@@ -13,7 +17,8 @@
         </style>
     </head>
     <body>
-        <canvas id="mycanvas" width="500" height="250"></canvas>
+        <canvas id="mycanvas" width="900" height="450"></canvas>
+        <img src="Perro.jpg" id="foto" style="display: none;">
         <script>
             var canvas = document.getElementById('mycanvas'); 
             var ctx = canvas.getContext('2d');
@@ -51,7 +56,42 @@
             ctx.arc(400, 170, 40, 0, 2 * Math.PI);
             ctx.fill();
             ctx.stroke();
-        </script>
-        
+// ------------------T E X T O --------------------------
+            ctx.fillStyle = "rgb(25,200,135)"
+            ctx.font = "30px Arial";
+            ctx.fillText("HOLA MUNDO", 10, 400);
+
+            ctx.strokeStyle = "gray";
+            ctx.strokeText("HOLA MUNDO", 14, 400);
+// ------------------ G R A D I A N T E --------------------------
+            // CREARLO
+            var grd = ctx.createLinearGradient(550, 10, 100, 200);
+            grd.addColorStop(0, "green");
+            grd.addColorStop(0.5, "blue");
+            grd.addColorStop(1, "white");
+
+            // TAMAÑO
+            ctx.fillStyle = grd;
+            ctx.fillRect(480, 10, 100, 150);
+// ------------------ G R A D I A N T E    C I R C U L A R ------------
+            // CREARLO
+            var grd = ctx.createRadialGradient(100, 260, 20, 100, 260, 100);
+            grd.addColorStop(0, "blue");
+            grd.addColorStop(1, "Red");
+
+            // TAMAÑO
+            ctx.fillStyle = grd;
+            ctx.fillRect(20, 180, 160, 160);
+// ------------------ I M A G E N E S ------------
+            var img = document.getElementById("foto");
+            // ctx.drawImage(img, 100, 10); 
+            /*TUVE QUE HACERLO ASI PORQUE NO MOSTRABA LA IMAGEN
+            Y HA LO QUE LEI ES PORQUE LA IMAGEN SE CARGA DESPUES DEL CANVAS*/
+
+            img.addEventListener('load', function(){
+                ctx.drawImage(img,250,240,200,200);
+            })
+
+        </script>        
     </body>
 </html>
