@@ -7,7 +7,12 @@
         6.-Utiliza font y fillText para realizar un texto
         7.-Utiliza createLinearGradient, addColorStop y fillRect para realizar una figura
         8.-Utiliza createRadialGradient, addColorStop y fillRect para realizar una figura
-        9.-Utiliza drawImage 
+        9.-Utiliza drawImage   
+        12.-Con ayuda del evento click realizar realizar una figura
+        13.-Con ayuda del evento mouseover realizar una figura
+        14.-Con ayuda del evento mouseout realizar  una figura
+        15.-Con ayuda del evento mousemove realizar una figura
+        16.-Con ayuda de los eventos mouseup y mousedown realizar una figura
     -->
     <head>
         <style>
@@ -22,75 +27,131 @@
         <script>
             var canvas = document.getElementById('mycanvas'); 
             var ctx = canvas.getContext('2d');
-// --------------- C U A D R A D O S -----------------------------
-            ctx.fillStyle = "rgb(125,136,229)";
-            ctx.fillRect (20, 20, 70, 60);
+            var color = "rgb(125,136,229)";
+            var figura = true;
+            var press = false;
 
-            ctx.fillStyle = "rgb(205,0,9)";
-            ctx.fillRect (70, 60, 70, 60);
+            ctx.fillStyle = color;
+// --------------- C L I C K -----------------------------
+            canvas.addEventListener("click", (e) => {
+                console.log("HOLA")
+                console.log(e);
+                if(figura){
+                    ctx.beginPath();
+                    ctx.arc(e.layerX, e.layerY,50,0,2*Math.PI);
+                    ctx.fill();
+                    ctx.stroke();
+                }else{
+                    ctx.fillRect (e.layerX-50, e.layerY-50, 70, 70);
+                    ctx.strokeRect(e.layerX-50, e.layerY-50, 70, 70)
+                }
+            });
+// --------------- M O U S E O V E R -----------------------------
+            canvas.addEventListener("mouseover", (e) => {
+                console.log("MOUSEOVER")
+                color = random_rgba();
+                ctx.fillStyle=color;
+            });
+// --------------- M O U S E O U T ----------------------------- 
+            canvas.addEventListener("mouseout", (e) => {
+                console.log("MOUSEOUT")
+                figura = !figura;
+            });
+// --------------- M O U S E M O V E -----------------------------            
+             canvas.addEventListener("mousemove", (e) => {
+                console.log("MOUSEMOVE")
 
-            ctx.fillStyle = "rgb(255,150,255,0.5)";
-            ctx.fillRect (120, 100, 70, 60);
-// ---------------T R I A N G U L O -----------------------------
-            ctx.fillStyle = "rgb(125,200,155)";
-            ctx.beginPath();
-            ctx.moveTo(300, 20);
-            ctx.lineTo(270, 70);
-            ctx.lineTo(300, 80,);
-            ctx.fill();
-            ctx.closePath();
-// ---------------L I N E A -----------------------------
-            ctx.beginPath();
-            ctx.moveTo(350, 40,);
-            ctx.lineTo(350, 90);
+                if(press){
+                    ctx.beginPath();
+                    ctx.arc(e.layerX, e.layerY,2,0,2*Math.PI);
+                    ctx.fill();
+                    ctx.stroke();
+                }
+            });
+// --------------- M O U S E D O W N ----------------------------- 
+            canvas.addEventListener("mousedown", (e) => {
+                console.log("MOUSEDOWM")
+                press = true;
+            });
+// --------------- M O U S E U P----------------------------- 
+            canvas.addEventListener("mouseup", (e) => {
+                console.log("MOUSEUP")
+                press = false;
+            });
+// --------------- FUNCION PARA M O U S E O V E R ----------------------------- 
+            function random_rgba() {
+                var o = Math.round, r = Math.random, s = 255;
+                return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+            }
+// // --------------- C U A D R A D O S -----------------------------
+//             ctx.fillStyle = "rgb(125,136,229)";
+//             ctx.fillRect (20, 20, 70, 60);
 
-            ctx.stroke();
-            ctx.fill();
-// ------------------C I R C U L O S --------------------------
-            ctx.fillStyle = "rgb(150,200,55)";
-            ctx.beginPath();
-            ctx.arc(300, 170, 40, 0, 2 * Math.PI);
-            ctx.stroke();
+//             ctx.fillStyle = "rgb(205,0,9)";
+//             ctx.fillRect (70, 60, 70, 60);
 
-            ctx.beginPath();
-            ctx.arc(400, 170, 40, 0, 2 * Math.PI);
-            ctx.fill();
-            ctx.stroke();
-// ------------------T E X T O --------------------------
-            ctx.fillStyle = "rgb(25,200,135)"
-            ctx.font = "30px Arial";
-            ctx.fillText("HOLA MUNDO", 10, 400);
+//             ctx.fillStyle = "rgb(255,150,255,0.5)";
+//             ctx.fillRect (120, 100, 70, 60);
+// // ---------------T R I A N G U L O -----------------------------
+//             ctx.fillStyle = "rgb(125,200,155)";
+//             ctx.beginPath();
+//             ctx.moveTo(300, 20);
+//             ctx.lineTo(270, 70);
+//             ctx.lineTo(300, 80,);
+//             ctx.fill();
+//             ctx.closePath();
+// // ---------------L I N E A -----------------------------
+//             ctx.beginPath();
+//             ctx.moveTo(350, 40,);
+//             ctx.lineTo(350, 90);
 
-            ctx.strokeStyle = "gray";
-            ctx.strokeText("HOLA MUNDO", 14, 400);
-// ------------------ G R A D I A N T E --------------------------
-            // CREARLO
-            var grd = ctx.createLinearGradient(550, 10, 100, 200);
-            grd.addColorStop(0, "green");
-            grd.addColorStop(0.5, "blue");
-            grd.addColorStop(1, "white");
+//             ctx.stroke();
+//             ctx.fill();
+// // ------------------C I R C U L O S --------------------------
+//             ctx.fillStyle = "rgb(150,200,55)";
+//             ctx.beginPath();
+//             ctx.arc(300, 170, 40, 0, 2 * Math.PI);
+//             ctx.stroke();
 
-            // TAMAÑO
-            ctx.fillStyle = grd;
-            ctx.fillRect(480, 10, 100, 150);
-// ------------------ G R A D I A N T E    C I R C U L A R ------------
-            // CREARLO
-            var grd = ctx.createRadialGradient(100, 260, 20, 100, 260, 100);
-            grd.addColorStop(0, "blue");
-            grd.addColorStop(1, "Red");
+//             ctx.beginPath();
+//             ctx.arc(400, 170, 40, 0, 2 * Math.PI);
+//             ctx.fill();
+//             ctx.stroke();
+// // ------------------T E X T O --------------------------
+//             ctx.fillStyle = "rgb(25,200,135)"
+//             ctx.font = "30px Arial";
+//             ctx.fillText("HOLA MUNDO", 10, 400);
 
-            // TAMAÑO
-            ctx.fillStyle = grd;
-            ctx.fillRect(20, 180, 160, 160);
-// ------------------ I M A G E N E S ------------
-            var img = document.getElementById("foto");
-            // ctx.drawImage(img, 100, 10); 
-            /*TUVE QUE HACERLO ASI PORQUE NO MOSTRABA LA IMAGEN
-            Y HA LO QUE LEI ES PORQUE LA IMAGEN SE CARGA DESPUES DEL CANVAS*/
+//             ctx.strokeStyle = "gray";
+//             ctx.strokeText("HOLA MUNDO", 14, 400);
+// // ------------------ G R A D I A N T E --------------------------
+//             // CREARLO
+//             var grd = ctx.createLinearGradient(550, 10, 100, 200);
+//             grd.addColorStop(0, "green");
+//             grd.addColorStop(0.5, "blue");
+//             grd.addColorStop(1, "white");
 
-            img.addEventListener('load', function(){
-                ctx.drawImage(img,250,240,200,200);
-            })
+//             // TAMAÑO
+//             ctx.fillStyle = grd;
+//             ctx.fillRect(480, 10, 100, 150);
+// // ------------------ G R A D I A N T E    C I R C U L A R ------------
+//             // CREARLO
+//             var grd = ctx.createRadialGradient(100, 260, 20, 100, 260, 100);
+//             grd.addColorStop(0, "blue");
+//             grd.addColorStop(1, "Red");
+
+//             // TAMAÑO
+//             ctx.fillStyle = grd;
+//             ctx.fillRect(20, 180, 160, 160);
+// // ------------------ I M A G E N E S ------------
+//             var img = document.getElementById("foto");
+//             // ctx.drawImage(img, 100, 10); 
+//             /*TUVE QUE HACERLO ASI PORQUE NO MOSTRABA LA IMAGEN
+//             Y HA LO QUE LEI ES PORQUE LA IMAGEN SE CARGA DESPUES DEL CANVAS*/
+
+//             img.addEventListener('load', function(){
+//                 ctx.drawImage(img,250,240,200,200);
+//             })
 
         </script>        
     </body>
