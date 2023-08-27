@@ -1,0 +1,85 @@
+<html>
+    <!-- MARIELENA NUÑEZ ROMERO
+        PROGRAMACION AVANZADA EN INTERNET
+
+    -->
+    <head>
+        <style>
+            canvas{
+                background-color: rgb(113, 3, 117);
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="mycanvas" width="900" height="450"></canvas>
+        <script>
+            var canvas = document.getElementById('mycanvas'); 
+            var ctx = canvas.getContext('2d');
+
+            ctx.fillStyle = "white";
+            ctx.fillRect (280, 70, 200, 140); //base pantalla 
+            ctx.fillRect (260, 220, 240, 200); //Cuerpo
+
+            ctx.fillStyle = "rgb(175,138,226)";
+            ctx.fillRect (290, 80, 180, 120); // Pantalla
+            ctx.fillRect (270, 230, 220, 160); //Cuerpo2
+
+            ctx.strokeStyle = "white";
+            ctx.beginPath(); //Brazo 1
+            ctx.lineWidth = 18;
+            ctx.moveTo(265, 230,);
+            ctx.lineTo(200, 300);
+            ctx.stroke();
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath(); //Brazo 2
+            ctx.moveTo(495, 230,);
+            ctx.lineTo(560, 300);
+            ctx.stroke();
+            ctx.fill();
+
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 1;
+            ctx.fillStyle = "white";
+            ctx.fillRect (245, 140, 30, 50); //audifono derecho
+            ctx.fillRect (485, 140, 30, 50); // audifono izquierdo
+
+            ctx.fillStyle = "gray";
+            ctx.fillRect (255, 50, 10, 90); // audifono derecho
+            ctx.fillRect (495, 50, 10, 90); // audifono izquierdo
+            ctx.fillRect (260, 50, 240, 10); // arriba audifono
+
+            ctx.fillStyle = "black";  //ojo derecho
+            ctx.beginPath();
+            ctx.arc(340, 120, 10, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke(); 
+
+            ctx.beginPath();    //ojo izquierdo
+            ctx.arc(420, 120, 10, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = "rgb(150,200,55)";  //sonrisa
+            ctx.beginPath();
+            ctx.arc(380, 170, 10, 0, 2 * Math.PI);
+            ctx.stroke();
+
+            ctx.fillStyle = "rgb(175,138,226)";
+            ctx.fillRect (360, 150, 35, 20); //sonrisa
+          
+
+            ctx.fillStyle = "rgb(175,138,226)"  //Empresa
+            ctx.font = "30px Tahoma";   //Empresa
+            ctx.fillText(" M - N - R ", 310, 420);  //Empresa
+
+            ctx.fillStyle = "rgb(175,138,226)"  //Empresa
+            ctx.font = "28px Tahoma";   //Empresa
+            ctx.fillText("MARIELENA NUNEZ ROMERO", 520, 410);  //Empresa
+
+
+
+        </script>        
+    </body>
+</html>
