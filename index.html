@@ -19,6 +19,7 @@
         un cruadrado de x tamaño que su color cambie de manera random y siga las teclas de movimiento 
         20.-Con ayuda de los eventos keydown realizar un frame con canvas que permita que un 
         cuadrado siga las teclas de movimiento sin dejar una estela 
+        26.- Utilizando requestAnimationFrame y otras funciones
     -->
     <head>
         <style>
@@ -38,6 +39,8 @@
             var press = false;
             var x = 400;
             var y = 200;
+            //var direccion
+            var dir = 0;
 
             ctx.fillStyle = color;
 // --------- E V E N T O S   D E L   T E C L A D O  -----------------------------
@@ -45,22 +48,44 @@
                 console.log(e);
                 switch(e.keyCode){
                     case 38: //arriba
-                        y -= 10;
+                        dir = e.keyCode;
                     break;
                     case 40: // abajo
-                        y += 10;
+                        dir = e.keyCode;                
                     break;
                     case 39: // derecha
-                        x += 10;
+                        dir = e.keyCode;  
                     break;
                     case 37: //izquierda
-                        x -= 10;
+                        dir = e.keyCode;
                     break;
-
                 }
-                repaint();
+                //update();
             })
 
+
+            function update(){
+                switch(dir){
+                    case 38: //arriba
+                        y-= 10;
+                        if(y < -70){y = 450;}
+                    break;
+                    case 40: // abajo
+                        y+= 10;
+                        if(y > 450){y = -70;}
+                    break;
+                    case 39: // derecha
+                        x+= 10;
+                        if(x > 800){x = -70;}
+                    break;
+                    case 37: //izquierda
+                        x-= 10;
+                        if(x < -70){x = 800;}
+                    break;
+                }
+                repaint();
+                window.requestAnimationFrame(update);
+            }
             function repaint(){
                 ctx.fillStyle = "bisque";
                 ctx.fillRect (0, 0, 800, 400);
@@ -68,10 +93,31 @@
                 ctx.fillRect (x, y, 70, 70);
                 ctx.strokeRect(x, y, 70, 70);
             }
+
+            window.requestAnimationFrame = (function () {
+                return window.requestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    function (callback) {
+                        window.setTimeout(callback, 17);
+                    };
+            }());
+            window.requestAnimationFrame(update);
             
-
-
-
+            // switch(e.keyCode){
+            //         case 38: //arriba
+            //             dir = 1;
+            //         break;
+            //         case 40: // abajo
+            //             y += 10;
+            //         break;
+            //         case 39: // derecha
+            //             x += 10;
+            //         break;
+            //         case 37: //izquierda
+            //             x -= 10;
+            //         break;
+            //     }
 // // --------- E V E N T O S   D E L   M O U S E -----------------------------
 // // --------------- C L I C K -----------------------------
 //             canvas.addEventListener("click", (e) => {
