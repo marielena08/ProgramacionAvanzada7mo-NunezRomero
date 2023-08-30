@@ -1,0 +1,158 @@
+<html>
+    <!-- MARIELENA NUÑEZ ROMERO
+        PROGRAMACION AVANZADA EN INTERNET
+        22.-Dibuja un paisaje con figuras.
+    -->
+    <head>
+        <style>
+            canvas{
+                background-color: rgb(20, 122, 42);
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="mycanvas" width="900" height="450"></canvas>
+        <script>
+            var canvas = document.getElementById('mycanvas'); 
+            var ctx = canvas.getContext('2d');
+
+            var grd = ctx.createRadialGradient(460, 50, 380, 350, 180, 200); //  FONDO ATARDECER
+            grd.addColorStop(0, "ORANGE");
+            grd.addColorStop(1, "YELLOW");
+            ctx.fillStyle = grd;
+            //           x -  y  - lar - ancho
+            ctx.fillRect(0, 0, 900, 300);
+
+            ctx.lineWidth = 3;
+            
+            ctx.fillStyle = "#E198F3";
+            ctx.fillRect (60, 220, 280, 200); //CASA
+
+            ctx.fillStyle = "#280DEE"; // TECHO
+            ctx.beginPath();
+            ctx.moveTo(200, 60);
+            ctx.lineTo(350, 230);
+            ctx.lineTo(50, 230,);
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.fillStyle = "#C38018";
+            ctx.fillRect (160, 320, 80, 100); //PUERTA
+
+            ctx.fillStyle = "#D5CB02";
+            ctx.strokeStyle = "#FFF300";
+            ctx.beginPath();
+            ctx.arc(225, 390, 10, 0, 2 * Math.PI); //CHAPA
+            ctx.fill();
+            ctx.stroke();
+            ctx.fillStyle = "#75D4EE";
+            ctx.strokeStyle = "#C38018";
+
+            ctx.beginPath();
+            ctx.arc(120, 270, 30, 0, 2 * Math.PI); //VENTANA 1
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(120, 240,);
+            ctx.lineTo(120, 300);
+            ctx.stroke();
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(90, 270,);
+            ctx.lineTo(150, 270);
+            ctx.stroke();
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(280, 270, 30, 0, 2 * Math.PI); //VENTANA 2
+            ctx.fill();
+            ctx.stroke();
+
+            
+            ctx.beginPath();
+            ctx.moveTo(280, 240,);
+            ctx.lineTo(280, 300);
+            ctx.stroke();
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(250, 270,);
+            ctx.lineTo(310, 270);
+            ctx.stroke();
+            ctx.fill();
+
+            ctx.fillStyle = "#884906";
+            ctx.fillRect (660, 260, 70, 160); //TRONCO
+            ctx.fillStyle = "#9FD621";
+            ctx.strokeStyle = "#34BF04";
+            ctx.beginPath();
+            ctx.arc(690, 160, 110, 0, 2 * Math.PI); //ARBOL
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = "#F80A0A";
+            ctx.strokeStyle = "#9E0303";
+            ctx.beginPath();
+            ctx.arc(690, 160, 10, 0, 2 * Math.PI); //MANZANA
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(600, 160, 10, 0, 2 * Math.PI); //MANZANA
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(670, 130, 10, 0, 2 * Math.PI); //MANZANA
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(740, 130, 10, 0, 2 * Math.PI); //MANZANA
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(690, 80, 10, 0, 2 * Math.PI); //MANZANA
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(670, 220, 10, 0, 2 * Math.PI); //MANZANA
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(720, 240, 10, 0, 2 * Math.PI); //MANZANA
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(750, 200, 10, 0, 2 * Math.PI); //MANZANA
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = "WHITE";
+            ctx.beginPath();
+            ctx.arc(400, 70, 40, 0, 2 * Math.PI); // NUBE
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(450, 60, 40, 0, 2 * Math.PI); // NUBE
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(500, 70, 40, 0, 2 * Math.PI); // NUBE
+            ctx.fill();
+            ctx.arc(450, 80, 40, 0, 2 * Math.PI); // NUBE
+            ctx.fill();
+            ctx.beginPath();
+
+            var grd = ctx.createLinearGradient(550, 10, 100, 200);
+            grd.addColorStop(0, "green");
+            grd.addColorStop(0.5, "blue");
+            grd.addColorStop(1, "white");
+
+            // TAMAÑO
+            ctx.fillStyle = grd;
+            ctx.fillRect(480, 300, 900, 150);
+
+            ctx.fillStyle = "WHITE"  //NOMBRE
+            ctx.font = "18px Tahoma";   //NOMBRE
+            ctx.fillText("MARIELENA NUNEZ ROMERO", 80, 440);  //NOMBRE
+        </script>        
+    </body>
+</html>
