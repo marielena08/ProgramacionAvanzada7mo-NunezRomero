@@ -1,0 +1,154 @@
+<html>
+    <!-- MARIELENA NUÑEZ ROMERO
+        PROGRAMACION AVANZADA EN INTERNET
+        28.- Utilizando requestAnimationFrame  
+        31.- Utilizando requestAnimationFrame 
+        32.- Utilizando requestAnimationFrame
+    -->
+    <head>
+        <style>
+            canvas{
+                background-color: bisque;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="mycanvas" width="800" height="500"></canvas>
+        <script>
+// --------- V A R I A B L E S -----------------------------
+            var canvas = document.getElementById('mycanvas'); 
+            var ctx = canvas.getContext('2d');
+            var dir = 0;
+            var w_x = 100, w_y = 70;
+            var speed = 10;
+            let walls = [];
+
+// --------- C L A S E   R E C T A N G U L O  -----------------------------
+            class Rectangulo{
+                constructor(x,y,w,h,c){
+                    this.x = x;
+                    this.y = y;
+                    this.w = w;
+                    this.h = h;
+                    this.c = c;
+                }
+                paint(ctx){
+                    ctx.fillStyle = this.c;
+                    ctx.fillRect (this.x, this.y, this.w, this.h);
+                    ctx.strokeRect(this.x, this.y, this.w, this.h);
+                }
+                seTocan(target){
+                    if(this.x < target.x + target.w &&
+                        this.x + this.w > target.x &&
+                        this.y < target.y + target.h &&
+                        this.y + this.h  > target.y)
+                        {
+                            return true;
+                        }
+                    return false;
+                }
+            }
+            const player = new Rectangulo (350,200,50,50,"black"); 
+            const target = new Rectangulo (300,300,40,40,"blue");
+
+            walls.push(new Rectangulo (100,20,480,30,"gray")); //Obtaculos
+            walls.push(new Rectangulo (100,450,480,30,"gray")); //Obtaculos
+
+// --------- E V E N T O S   D E L   T E C L A D O  -----------------------------
+            document.addEventListener("keydown",(e) =>{
+                console.log(e);
+                switch(e.keyCode){
+                    case 38: //arriba
+                        dir = e.keyCode;
+                    break;
+                    case 40: // abajo
+                        dir = e.keyCode;                
+                    break;
+                    case 39: // derecha
+                        dir = e.keyCode;  
+                    break;
+                    case 37: //izquierda
+                        dir = e.keyCode;
+                    break;
+                }
+            })
+// ------------------ F U N C I O N E S  -----------------------------
+            function update(){
+                switch(dir){
+                    case 38: //arriba
+                        player.y -= speed;
+                        if(player.y < -50){player.y = 550}
+                    break;
+                    case 40: // abajo
+                        player.y += speed;
+                        if(player.y > 550){player.y = 0}
+                    break;
+                    case 39: // derecha
+                        player.x += speed;
+                        if(player.x > 800){player.x = 0}
+                    break;
+                    case 37: //izquierda
+                        player.x -= speed;
+                        if(player.x < -50){player.x = 800;}
+                    break;
+                }
+
+                if(player.seTocan(target)){
+                    t_x = Math.random() * (460);
+                    t_y = Math.random() * (460);
+                    speed += 5;
+                }
+
+                for (var i = walls.length-1; i >= 0; i--) {
+                    if (player.seTocan(walls[i])){
+                        switch(dir){
+                            case 38: //arriba
+                                player.y+= speed;
+                            break;
+                            case 40: // abajo
+                                player.y-= speed;
+                            break;
+                            case 39: // derecha
+                                player.x-= speed;
+                            break;
+                            case 37: //izquierda
+                                player.x+= speed;
+                            break;
+                        }
+                        dir = 0;
+                    } 
+                }
+                repaint();
+                window.requestAnimationFrame(update);
+            }
+            function repaint(){
+                ctx.fillStyle = "bisque";
+                ctx.fillRect (0, 0, 800, 550);
+                
+                player.c = random_rgba();
+                player.paint(ctx);
+
+                target.paint(ctx);
+
+                for (var i = walls.length-1; i >= 0; i--) {
+                    walls[i].paint(ctx);   
+                }
+            }
+
+            window.requestAnimationFrame = (function () {
+                return window.requestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    function (callback) {
+                        window.setTimeout(callback, 17);
+                    };
+            }());
+            window.requestAnimationFrame(update);
+            
+            function random_rgba() {
+                var o = Math.round, r = Math.random, s = 255;
+                return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+            }
+        </script>        
+    </body>
+</html>
