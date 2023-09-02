@@ -1,0 +1,224 @@
+<html>
+    <!-- MARIELENA NUÑEZ ROMERO
+        PROGRAMACION AVANZADA EN INTERNET
+        23.-Replica la siguiente imagen - MARIO BROS
+    -->
+    <head>
+        <style>
+            canvas{
+                background-color: rgb(179,238,254);
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="mycanvas" width="1000" height="500"></canvas>
+        <img src="mario.png" id="foto" style="display: none;">
+        <img src="planta.png" id="foto2" style="display: none;">
+        <script>
+            var canvas = document.getElementById('mycanvas'); 
+            var ctx = canvas.getContext('2d');
+
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = "black";
+            ctx.fillStyle = "rgb(252,149,99)";
+            ctx.fillRect (30, 400, 970, 100); //PISO
+            ctx.strokeRect (30, 400, 970, 100);
+
+            
+            ctx.fillStyle = "black";
+            ctx.fillRect (421, 200, 30, 200); // SOMBRA CUBO AZUL
+            ctx.fillStyle = "rgb(113,194,255)";
+            ctx.fillRect (280, 150, 150, 250); //CUBO AZUL
+            ctx.strokeRect (280, 150, 150, 250);
+            ctx.fillStyle = "gray";
+            ctx.beginPath();
+            ctx.arc(295,165, 8, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(410, 165, 8, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(410, 385, 8, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.lineWidth = 3;
+            ctx.fillStyle = "black";
+            ctx.fillRect (321, 310, 20, 90); // SOMBRA CUBO CREMA
+            ctx.fillStyle = "rgb(255,192,185)";
+            ctx.fillRect (200, 280, 120, 120); //CUBO CREMA
+            ctx.strokeRect (200, 280, 120, 120);
+            ctx.fillStyle = "gray";
+            ctx.beginPath();
+            ctx.arc(300,295, 8, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(300,385, 8, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(220,295, 8, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(220,385, 8, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.fillStyle = "rgb(81,217,107)";
+            ctx.fillRect (870, 280, 140, 120); //CUBO VERDE
+            ctx.strokeRect (870, 280, 140, 120);
+            ctx.fillStyle = "gray";
+            ctx.beginPath();
+            ctx.arc(890,295, 8, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(890,385, 8, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.fillStyle = "rgb(29,134,16)";
+            ctx.fillRect (600, 280, 100, 120); //TUBERIA
+            ctx.strokeRect (600, 280, 100, 120);
+
+            var gradiente1=ctx.createLinearGradient(0,830,0,0);
+            gradiente1.addColorStop(0.2,"rgb(0,255,0)");
+            gradiente1.addColorStop(0.4,"rgb(0,0,0)");
+            gradiente1.addColorStop(1,"rgb(0,250,0)");
+            ctx.fillStyle=gradiente1;
+            
+            ctx.fillRect(600,280,100,120);
+            ctx.fillRect (585, 280, 130, 30); //TUBERIA
+            ctx.strokeRect (585, 280, 130, 30);
+            ctx.stroke();
+
+            ctx.fillStyle = "rgb(255,144,95)";
+            ctx.fillRect (50, 150, 60, 60); //CUBO
+            ctx.strokeRect (50, 150, 60, 60);
+            ctx.fillStyle = "black";
+            ctx.beginPath();
+            ctx.arc(60, 160, 2, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(60, 200, 2, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(100, 160, 2, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(100, 200, 2, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.closePath();
+            ctx.fillStyle = "rgb(255,144,95)";
+            ctx.fillRect (150, 40, 60, 60); //CUBO
+            ctx.strokeRect (150, 40, 60, 60);
+            ctx.fillStyle = "black";
+            ctx.beginPath();
+            ctx.arc(160, 50, 2, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(160, 90, 2, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(200, 50, 2, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(200, 90, 2, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.closePath();
+            ctx.fillStyle = "rgb(255,144,95)";
+            ctx.fillRect (210, 40, 60, 60); //CUBO
+            ctx.strokeRect (210, 40, 60, 60);
+            ctx.fillStyle = "black";
+            ctx.beginPath();
+            ctx.arc(220, 50, 2, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(220, 90, 2, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(260, 50, 2, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(260, 90, 2, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.closePath();
+            ctx.fillStyle = "rgb(255,144,95)";
+            ctx.fillRect (850, 70, 60, 60); //CUBO
+            ctx.strokeRect (850, 70, 60, 60);
+            ctx.fillStyle = "black";
+            ctx.beginPath();
+            ctx.arc(860, 80, 2, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(860, 120, 2, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(900, 80, 2, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(900, 120, 2, 0, 2 * Math.PI); // TORNILLO
+            ctx.fill();
+            ctx.stroke();
+            ctx.closePath();
+            ctx.stroke();
+
+            ctx.fillStyle = "rgb(47,105,34)";
+            ctx.beginPath();
+            ctx.arc(60, 360, 30, 0, 2 * Math.PI); // ARBUSTO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(80, 320, 30, 0, 2 * Math.PI); // ARBUSTO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(110, 360, 30, 0, 2 * Math.PI); // ARBUSTO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(80, 370, 30, 0, 2 * Math.PI); // ARBUSTO
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(80, 360, 35, 0, 2 * Math.PI); // ARBUSTO
+            ctx.fill();
+
+            var img = document.getElementById("foto");
+            img.addEventListener('load', function(){
+                ctx.drawImage(img,490,340,50,60);
+            })
+
+            var img1 = document.getElementById("foto2");
+            img1.addEventListener('load', function(){
+                ctx.drawImage(img1,630,220,50,60);
+            })
+            
+            ctx.fillStyle = "BLACK"  //NOMBRE
+            ctx.font = "18px Tahoma";   //NOMBRE
+            ctx.fillText("MARIELENA NUNEZ ROMERO", 50, 490);  //NOMBRE
+        </script>        
+    </body>
+</html>
