@@ -5,11 +5,12 @@
         31.- Utilizando requestAnimationFrame 
         32.- Utilizando requestAnimationFrame
         33.- Utilizando requestAnimationFrame y otras funciones crear obstáculos e implementar pausa y score
+        34.- Implementación de imágenes y sonido
     -->
     <head>
         <style>
             canvas{
-                background-color: bisque;
+                background-color: "Bisque";
             }
         </style>
     </head>
@@ -21,10 +22,16 @@
             var ctx = canvas.getContext('2d');
             var dir = 0;
             var w_x = 100, w_y = 70;
-            var speed = 10;
+            var speed = 5;
             let walls = [];
             let pause = false;
             let score = 0;
+            let image = new Image();
+            image.src = "conejo.png";
+            let image2 = new Image();
+            image2.src = "zanahoria.png";
+            let audio = new Audio();
+            audio.src = "coin.mp3";
 
 // --------- C L A S E   R E C T A N G U L O  -----------------------------
             class Rectangulo{
@@ -107,6 +114,7 @@
                         target.y = Math.random() * (460);
                         speed += 1;
                         score += 10;
+                        audio.play();
                     }
 
                     for (var i = walls.length-1; i >= 0; i--) {
@@ -135,16 +143,18 @@
             function repaint(){
                 
                 if (!pause){
-                    ctx.fillStyle = "bisque";
+                    ctx.fillStyle = "Bisque";
                     ctx.fillRect (0, 0, 800, 550);
                     ctx.fillStyle = "black";
                     ctx.font = "20px Tahoma"; //SCORE
                     ctx.fillText("S C O R E: "+score, 10, 35);
                     
-                    player.c = random_rgba();
-                    player.paint(ctx);
+                    // player.c = random_rgba();
+                    // player.paint(ctx);
+                    ctx.drawImage(image,player.x,player.y,60,60);
 
-                    target.paint(ctx);
+                    // target.paint(ctx);
+                    ctx.drawImage(image2,target.x,target.y,40,40);
 
                     for (var i = walls.length-1; i >= 0; i--) {
                         walls[i].paint(ctx);   
