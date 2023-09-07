@@ -1,0 +1,201 @@
+<html>
+    <!-- MARIELENA NUÑEZ ROMERO
+        PROGRAMACION AVANZADA EN INTERNET
+        24.-Replica la siguiente imagen 
+    -->
+    <head>
+        <style>
+            canvas{
+                background-color: rgb(32,0,160);
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="mycanvas" width="1000" height="500"></canvas>
+        <script>
+// --------- V A R I A B L E S -----------------------------
+            var canvas = document.getElementById('mycanvas'); 
+            var ctx = canvas.getContext('2d');
+            let mosaico = [];
+
+            class Cuadrado{
+                constructor(x,y,w,h,c){
+                    this.x = x;
+                    this.y = y;
+                    this.w = w;
+                    this.h = h;
+                    this.c = c;
+                }
+                paint(ctx){
+                    ctx.fillStyle = this.c;
+                    ctx.fillRect (this.x, this.y, this.w, this.h);
+                    ctx.strokeRect(this.x, this.y, this.w, this.h);
+                }
+            }
+            crearMosaico();
+            ctx.strokeStyle = "rgb(224,224,0)";
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.arc(180, 270, 30, 0, 2 * Math.PI); //ANILLO
+            ctx.stroke();
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.arc(280, 270, 30, 0, 2 * Math.PI); //ANILLO
+            ctx.stroke();
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.arc(380, 270, 30, 0, 2 * Math.PI); //ANILLO
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.fillStyle = "#c06000";
+            ctx.fillRect (0, 400, 1050, 100); //PISO
+            ctx.fillStyle = "#006000";
+            ctx.fillRect (0, 380, 1050, 20); 
+            ctx.fillStyle = "#40a000";
+            ctx.fillRect (0, 360, 1050, 20); 
+            ctx.fillStyle = "#80e000";
+            ctx.fillRect (0, 340, 1050, 20); 
+
+            for (let i = 0; i < mosaico.length; i++) {
+                ctx.strokeStyle = "rgb(96,32,0)";
+                mosaico[i].paint(ctx);
+            }
+
+            ctx.beginPath();
+            ctx.fillStyle = "#884906";
+            ctx.fillRect (640, 130, 30, 210); //TRONCO
+            ctx.strokeStyle = "#8B4513"; 
+            ctx.stroke();
+
+            dibujarPalmera();
+
+            ctx.beginPath();
+            ctx.fillStyle = "rgb(83,167,0)";
+            ctx.fillRect (840, 280, 10, 60); //TRONCO
+            ctx.strokeStyle = "rgb(83,167,0)"; 
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.fillStyle = "rgb(224,224,0)";
+            ctx.arc(845, 270, 35, 0, 2 * Math.PI); //GIRASOL
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.fillStyle = "rgb(64,96,64)";
+            ctx.arc(845, 270, 20, 0, 2 * Math.PI); //CENTRO GIRASOL
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.fillStyle = "BLACK"  //NOMBRE
+            ctx.font = "18px Tahoma";   //NOMBRE
+            ctx.fillText("MARIELENA NUNEZ ROMERO", 10, 395);  //NOMBRE
+          
+            function dibujarHojaPalmera(x, y, controlX, controlY, endX, endY) {  // controlX/controlY = curva cuadratica
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.quadraticCurveTo(controlX, controlY, endX, endY); //dibuja la curva 
+                ctx.strokeStyle = "rgb(128,224,0)";
+                ctx.stroke();
+                // Hojitas
+                let hojitas = 40;
+                let hojitaLength = 18; // Tamaño de hojitas
+                for (let i = 1; i < hojitas; i++) {
+                    let t = i / hojitas;
+                    let xt = (1 - t) * (1 - t) * x + 2 * (1 - t) * t * controlX + t * t * endX;
+                    let yt = (1 - t) * (1 - t) * y + 2 * (1 - t) * t * controlY + t * t * endY;
+                    ctx.beginPath();
+                    ctx.moveTo(xt, yt);
+                    ctx.lineWidth = 1.5;
+                    ctx.lineTo(xt + (endX - controlX) / hojitas * hojitaLength, yt + (endY - controlY) / hojitas * hojitaLength);
+                    ctx.stroke();
+                }
+            }
+
+            function dibujarPalmera(){
+                //Palmera Completa
+                dibujarHojaPalmera(630, 150, 700, 120, 750, 150);
+                dibujarHojaPalmera(640, 150, 730, 100, 780, 150);
+                dibujarHojaPalmera(630, 150, 720, 80, 750, 130);
+                dibujarHojaPalmera(650, 150, 760, 100, 780, 180);
+                dibujarHojaPalmera(650, 150, 680, 100, 730, 110);
+                dibujarHojaPalmera(660, 150, 600, 100, 550, 100);
+                dibujarHojaPalmera(650, 150, 600, 80, 560, 120);
+                dibujarHojaPalmera(660, 130, 600, 90, 550, 150);
+                dibujarHojaPalmera(660, 140, 660, 50, 520, 100);
+                dibujarHojaPalmera(660, 140, 700, 50, 520, 80);
+                dibujarHojaPalmera(660, 140, 700, 50, 620, 80);
+                dibujarHojaPalmera(660, 150, 700, 80, 680, 50);
+                dibujarHojaPalmera(660, 140, 700, 50, 820, 80);
+                dibujarHojaPalmera(660, 140, 700, 50, 750, 60);
+                dibujarHojaPalmera(660, 140, 700, 50, 730, 70);
+                dibujarHojaPalmera(660, 140, 600, 90, 570, 130);
+
+                //Palmera incompleta
+                dibujarHojaPalmera(-10, 150, 100, 100, 150, 150);
+                dibujarHojaPalmera(-20, 150, 130, 100, 180, 150);
+                dibujarHojaPalmera(-10, 150, 120, 80, 150, 130);
+                dibujarHojaPalmera(-20, 150, 160, 100, 180, 180);
+                dibujarHojaPalmera(-20, 150, 80, 100, 130, 110);
+                dibujarHojaPalmera(-10, 150, 80, 100, 150, 100);
+                dibujarHojaPalmera(-10, 150, 80, 80, 160, 120);
+                dibujarHojaPalmera(-20, 130, 100, 90, 150, 100);
+                dibujarHojaPalmera(-10, 140, 60, 50, 120, 80);
+            }
+
+            function crearMosaico() {
+                mosaico.push(new Cuadrado (0,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (0,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (30,430,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (60,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (60,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (90,430,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (120,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (120,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (150,430,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (180,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (180,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (210,430,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (240,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (240,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (270,430,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (300,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (300,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (330,430,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (360,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (360,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (390,430,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (420,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (420,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (450,430,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (480,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (480,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (510,430,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (540,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (540,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (570,430,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (600,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (600,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (630,430,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (660,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (660,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (690,430,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (720,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (720,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (750,430,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (780,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (780,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (810,430,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (840,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (840,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (870,430,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (900,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (900,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (930,430,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (960,400,30,30,"rgb(96,32,0)")); //MOSAICOS
+                mosaico.push(new Cuadrado (960,460,30,30,"rgb(96,32,0)")); //MOSAICOS
+            }
+        </script>        
+    </body>
+</html>
