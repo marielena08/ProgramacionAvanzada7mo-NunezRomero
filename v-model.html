@@ -1,0 +1,62 @@
+<html>
+    <!-- MARIELENA NUÑEZ ROMERO
+        PROGRAMACION AVANZADA EN INTERNET
+        UNIDAD 2 VUE
+
+    -->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body{
+                background-color: cornflowerblue;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="container_app">
+            <!-- <h1>{{ message }}</h1> -->
+            <h1>HOLA {{name}}</h1>
+            <br>
+            <input type="text" v-model="name" name="">
+            <button @click="count++">
+                CLICK ME:{{count}}
+            </button>
+            <br>
+            <input type="" v-model="num1" name=""> <br>
+            <input type="" v-model="num2" name="">
+            <br>
+            <button @click="resultado=((+num1)+(+num2))">
+                suma
+            </button>
+            <br>
+            <h3>EL RESULTADO ES:  <span v-if="resultado!=0">{{resultado}}</span></h3>
+        </div>
+
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"> </script> 
+        <script type="text/javascript"> 
+            const{createApp, ref} = Vue
+
+            createApp({
+                setup(){
+                    // const message = ref('HOLA VUE')
+                    const message = "";
+                    const name = "";
+                    const num1 = 0;
+                    const num2 = 0;
+
+                    return {
+                        // message
+                        name: ref('NOMBRE'),
+                        count: ref(10),
+                        num1: ref(0),
+                        num2: ref(0),
+                        resultado: ref(0)
+                    }
+                }
+
+            }).mount('#container_app')
+
+        </script>        
+    </body>
+</html>
